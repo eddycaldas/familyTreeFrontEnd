@@ -2,10 +2,20 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "dependencies": {
+    "animated": "^0.2.1",
     "expo": "^23.0.0",
+    "exponent": "^14.0.0",
+    "images": "^3.0.1",
+    "knex": "^0.14.2",
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
-    "react-navigation": "^1.0.0-beta.21"
+    "react-native-dimension": "^1.0.6",
+    "react-native-elements": "^0.18.4",
+    "react-native-optimized-flatlist": "^1.0.3",
+    "react-native-parallax-swiper": "^0.5.4",
+    "react-native-platform-touchable": "^1.1.1",
+    "react-navigation": "^1.0.0-beta.21",
+    "stylesheet": "^0.9.1"
   },
   "name": "familytreefrontend",
   "version": "1.0.0",
