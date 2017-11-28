@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View, Text} from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 
 class AllFamiliesScreen extends Component {
   state = {
-    data: []
+    data: [],
   };
   
   componentWillMount() {
@@ -19,16 +20,35 @@ class AllFamiliesScreen extends Component {
   
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList data={this.state.data}
-          keyExtractor={(x, i) => i}
-          renderItem={({item}) => 
-            <Text>{`${item.husband_name} ${item.wife_name}`}
-            </Text>}
+      <View>
+        <List>
+          <FlatList
+            data={this.state.data}
+            keyExtractor={(x, i) => i}
+            ListFooterComponent={() => 
+              this.state.loading
+                ? null
+                :  <ActivityIndicator size='large' animating />}
+            renderItem={({ item }) =>
+              <ListItem
+                roundAvatar
+                avatar={{ uri: item.husband_image }}
+                title={`${ item.husband_name }`}
+              />}
+          />
 
-        />
+        </List>
       </View>
-        )
+      // <View style={styles.container}>
+      //   <FlatList data={this.state.data}
+      //     keyExtractor={(x, i) => i}
+      //     renderItem={({item}) => 
+      //       <Text>{`${item.husband_name}`}
+      //       </Text>}
+      // 
+      //   />
+      // </View>
+    );
         }
         }
         
