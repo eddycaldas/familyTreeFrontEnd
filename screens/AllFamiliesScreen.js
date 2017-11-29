@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View, Text} from 'react-native';
+import { ActivityIndicator,FlatList, StyleSheet, View, Text} from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import { Swipeout } from 'react-native-swipeout';
 
 class AllFamiliesScreen extends Component {
   state = {
@@ -25,32 +26,18 @@ class AllFamiliesScreen extends Component {
           <FlatList
             data={this.state.data}
             keyExtractor={(x, i) => i}
-            ListFooterComponent={() => 
-              this.state.loading
-                ? null
-                :  <ActivityIndicator size='large' animating />}
             renderItem={({ item }) =>
               <ListItem
                 roundAvatar
                 avatar={{ uri: item.husband_image }}
-                title={`${ item.husband_name }`}
+                title={`${item.husband_name}`}
               />}
           />
-
         </List>
       </View>
-      // <View style={styles.container}>
-      //   <FlatList data={this.state.data}
-      //     keyExtractor={(x, i) => i}
-      //     renderItem={({item}) => 
-      //       <Text>{`${item.husband_name}`}
-      //       </Text>}
-      // 
-      //   />
-      // </View>
-    );
-        }
-        }
+              );
+            }
+          }
         
 const styles = StyleSheet.create({
   container: {
