@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "animated": "^0.2.1",
+    "axios": "^0.17.1",
     "combine-reducers": "^1.0.0",
     "expo": "^23.0.0",
     "exponent": "^14.0.0",
@@ -25,8 +26,11 @@
   },
   "name": "familytreefrontend",
   "version": "1.0.0",
-  "devDependencies": {},
+  "devDependencies": {
+    "react-native-clean-project": "^1.0.4"
+  },
   "scripts": {
+    "purge": "./node_modules/.bin/react-native-clean-project",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

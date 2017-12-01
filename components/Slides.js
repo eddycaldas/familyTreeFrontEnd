@@ -58,7 +58,7 @@ const styles = {
     color: 'white'
   },
   buttonStyle: {
-    backgroundColor: '#0288D1',
+    backgroundColor: '#1D65A6',
     // marginTop: 15
   }
 }

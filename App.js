@@ -30,10 +30,11 @@ export default class App extends React.Component {
         })
       }
     }, {
-      // navigationOptions: { this is for the bottom manu
+      // navigationOptions: { 
       //   tabBarVisible: false 
       // },
-      lazy: true
+      lazy: true,
+      animationEnabled: false,
     }
   );
     
