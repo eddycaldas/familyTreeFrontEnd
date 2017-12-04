@@ -10,13 +10,13 @@ class FamilyScreen extends Component {
     super(props)
   }
 
-
   render() {
-    console.log(this.props)
+    const { family } = this.props.navigation.state.params
+    
     return (
       <View style={styles.container}>
-        <Text>text</Text>
-
+        <Text>{family.husband_name}</Text>
+        
       </View>
     )
   }

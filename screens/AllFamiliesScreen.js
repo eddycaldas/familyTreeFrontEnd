@@ -6,38 +6,39 @@ import { ActivityIndicator,
   Text
   } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation'
 
 class AllFamiliesScreen extends Component {
-  state = 
-      {
-          husband_name: '',
-          husband_birthday: '',
-          husband_POB: '',
-          husband_image: '',
-          wife_name: '',
-          wife_birthday: '',
-          wife_POB: '',
-          wife_image: '',
-          kid1_name: '',
-          kid1_birthday: '',
-          kid1_POB: '',
-          kid1_image: '',
-          kid2_name: '',
-          kid2_birthday: '',
-          kid2_POB: '',
-          kid2_image: '',
-          kid3_name: '',
-          kid3_birthday: '',
-          kid3_POB: '',
-          kid3_image: '',
-          kid4_name: '',
-          kid4_birthday: '',
-          kid4_POB: '',
-          kid4_image: ''
-        }
-  // state = {
-  //   data: [],
-  // };
+  // state = 
+  //     {
+  //         husband_name: '',
+  //         husband_birthday: '',
+  //         husband_POB: '',
+  //         husband_image: '',
+  //         wife_name: '',
+  //         wife_birthday: '',
+  //         wife_POB: '',
+  //         wife_image: '',
+  //         kid1_name: '',
+  //         kid1_birthday: '',
+  //         kid1_POB: '',
+  //         kid1_image: '',
+  //         kid2_name: '',
+  //         kid2_birthday: '',
+  //         kid2_POB: '',
+  //         kid2_image: '',
+  //         kid3_name: '',
+  //         kid3_birthday: '',
+  //         kid3_POB: '',
+  //         kid3_image: '',
+  //         kid4_name: '',
+  //         kid4_birthday: '',
+  //         kid4_POB: '',
+  //         kid4_image: ''
+  //       }
+  state = {
+    data: [],
+  };
   
   componentWillMount() {
     this.fetchData();
@@ -62,9 +63,7 @@ class AllFamiliesScreen extends Component {
     );
   };
   
-  render() {
-    // console.log(this.state.data);
-    
+  render() {    
     return (
       <View>
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0}}>
@@ -76,7 +75,6 @@ class AllFamiliesScreen extends Component {
                 title={`${item.husband_name}`}
                 avatar={{ uri: item.husband_image}}
                 containerStyle={{ borderBottomWidth: 0 }}
-                // onPress={() => console.log(item.husband_name)}
                 onPress={() => this.getFamily(item)}
               />
             )}
@@ -87,16 +85,17 @@ class AllFamiliesScreen extends Component {
           />
         </List>
       </View>
-              );
-            }
+    );
+  }
             
-            getFamily(item){
-              console.log(item);
-              this.props.navigation.navigate('family');
+    getFamily(item){
+      console.log(item);
 
-            }
+      this.props.navigation.navigate('family', { family: item });
+        
+    }
             
-          }
+}
         
 const styles = StyleSheet.create({
   container: {

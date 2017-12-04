@@ -27,7 +27,7 @@ export default class App extends React.Component {
               removeFamily: { screen: RemoveFamilyScreen }
             })
           }
-        })
+        }, {lazy: true})
       }
     }, {
       // navigationOptions: { 
