@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
-import { View, Text} from 'react-native';
+import { View, 
+  Text,
+  StyleSheet } 
+  from 'react-native';
+import AllFamiliesScreen from './AllFamiliesScreen'
 
 class FamilyScreen extends Component {
-  state = {
-    data: [],
-  };
-  
-  componentWillMount() {
-  
-    this.fetchData();
+  constructor(props){
+    super(props)
   }
-  
-  fetchData = async () => {
-    const response = await fetch('https://familytreebackend1.herokuapp.com/family')
-    const json = await response.json();
-    this.setState({data: json})
-  }
-  
+
+
   render() {
+    console.log(this.props)
     return (
-      <View>
-        
+      <View style={styles.container}>
+        <Text>text</Text>
+
       </View>
     )
   }
 }
-
-export default FamilyScreen;
+      
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+      
+  export default FamilyScreen;
