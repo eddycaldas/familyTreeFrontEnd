@@ -88,7 +88,7 @@ class AllFamiliesScreen extends Component {
               [
                 {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                 {text: 'yes', onPress: ()=> {
-                  data.splice(this.props.id: 1);
+                  this.data.splice(this.props.id: 1);
                   this.props.parentFlatList.refreshFlatList(deletingRow);
                 }},
               ],
