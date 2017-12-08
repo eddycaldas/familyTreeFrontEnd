@@ -3,42 +3,29 @@ import { ActivityIndicator,
   FlatList, 
   StyleSheet, 
   View, 
-  Text
+  Text,
+  Alert
   } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
+import Swipeout from 'react-native-swipeout'
 
 class AllFamiliesScreen extends Component {
-  // state = 
-  //     {
-  //         husband_name: '',
-  //         husband_birthday: '',
-  //         husband_POB: '',
-  //         husband_image: '',
-  //         wife_name: '',
-  //         wife_birthday: '',
-  //         wife_POB: '',
-  //         wife_image: '',
-  //         kid1_name: '',
-  //         kid1_birthday: '',
-  //         kid1_POB: '',
-  //         kid1_image: '',
-  //         kid2_name: '',
-  //         kid2_birthday: '',
-  //         kid2_POB: '',
-  //         kid2_image: '',
-  //         kid3_name: '',
-  //         kid3_birthday: '',
-  //         kid3_POB: '',
-  //         kid3_image: '',
-  //         kid4_name: '',
-  //         kid4_birthday: '',
-  //         kid4_POB: '',
-  //         kid4_image: ''
-  //       }
-  state = {
-    data: [],
-  };
+  constructor(props){
+    super(props)
+    state = {
+      data: [],
+    },
+    this.state = {
+      activeRowKey: null
+    },
+    this.state = ({
+      deletedRowKey: null,
+    });
+  }
+    // state = {
+    //   data: [],
+    // }
   
   componentWillMount() {
     this.fetchData();
@@ -50,7 +37,16 @@ class AllFamiliesScreen extends Component {
     this.setState({data: json})
   }
   
+  componentDidMount(){
+    this.refreshDataFromServer();
+  }
+  refreshDataFromServer = () => {
+    this.setState({ refreshing: true });
+    
+  }
+  
   renderSeparator = () => {
+
     return (
       <View
         style={{
@@ -62,21 +58,69 @@ class AllFamiliesScreen extends Component {
       />
     );
   };
-  
+
+  refreshFlatList = (deletedKey) => {
+    this.setState((prevState) => {
+      return {
+        deletedRowKey: deletedKey
+      };
+    });
+  }
+
   render() {    
+    const swipeSettings = {
+      autoClose: true,
+      onClose: (secId, rowId, direction) => {
+        if(this.setState.activeRowKey != null) {
+        this.setState({ activeRowKey: null });
+        }
+      },
+      onOpen: (secId, rowId, direction) => {
+        this.setState({ activeRowKey: this.props.id });
+      },
+      right: [
+        {
+          onPress: () => {
+            const deletingRow = this.state.activeRowKey;
+            Alert.alert(
+              'Alert',
+              'Are you sure you want to delete?',
+              [
+                {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'yes', onPress: ()=> {
+                  data.splice(this.props.id: 1);
+                  this.props.parentFlatList.refreshFlatList(deletingRow);
+                }},
+              ],
+              { cancelable: true }
+            )
+          },
+          text: 'Delete', type: 'delete'
+        }
+      ],
+      rowId: this.props.item,
+      sectionId: 1
+    };
+    
     return (
-      <View>
+      <View style={{backgroundColor: '#fff'}}>
+
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0}}>
           <FlatList
             data={this.state.data}
             renderItem={({ item }) => (
-              <ListItem
-                roundAvatar
-                title={`${item.husband_name}`}
-                avatar={{ uri: item.husband_image}}
-                containerStyle={{ borderBottomWidth: 0 }}
-                onPress={() => this.getFamily(item)}
-              />
+              <Swipeout {...swipeSettings}>
+                <ListItem
+                  style={styles.listItems}
+                  key={item.husband_name}
+                  roundAvatar
+                  title={`${item.husband_name}`}
+                  avatar={{ uri: item.husband_image}}
+                  containerStyle={{ borderBottomWidth: 0 }}
+                  onPress={() => this.getFamily(item)}
+                  parentFlatList={this}
+                />
+                </Swipeout>
             )}
             keyExtractor={item => item.id}
             ItemSeparatorComponent={this.renderSeparator}
@@ -89,21 +133,21 @@ class AllFamiliesScreen extends Component {
   }
             
     getFamily(item){
-      console.log(item);
-
       this.props.navigation.navigate('family', { family: item });
-        
     }
-            
 }
         
 const styles = StyleSheet.create({
   container: {
-    marginTop: 35,
+    marginTop: 55,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#E5ECEE'
+    backgroundColor: 'white',
+  },
+  listItems: {
+    backgroundColor: 'white',
+    color: 'white'
   }
 })        
 
